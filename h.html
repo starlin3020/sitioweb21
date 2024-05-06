@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>starling tv</title>
+  <h1>Reproductores de Video en Vivo de Twitch</h1>
+<h2>Starling TV</h2>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: black; /* Fondo negro */
+    }
+    h1 {
+      text-align: center;
+    }
+    #reproductores {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .reproductor {
+      width: 380px;
+      height: 250px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      position: relative; /* Posicionar imagen y enlace */
+    }
+    .reproductor img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ajustar la imagen al contenedor */
+    }
+    h2 {
+      text-align: center;
+      margin-top: 10px; /* Ajusta el espacio superior */
+      font-size: 24px; /* Ajusta el tamaño de la fuente */
+      color: #fff; /* Ajusta el color del texto */
+    }
+    .reproductor .enlace {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 5px 10px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Reproductores de Video en Vivo de Twitch</h1>
+  <div id="reproductores">
+    </div>
+  
+  <script src="https://embed.twitch.tv/embed/v1.js"></script>
+  <script>
+    var canales = [
+    { nombre: "Mt_025TM", urlCanal: "mt_025tm", enlace: "https://www.twitch.tv/mt_025tm" },
+    { nombre: "Canal 2", urlCanal: "dor141xc", enlace: "https://www.twitch.tv/dor141xc" },
+  
+    { nombre: "Mt_025TM", urlCanal: "mt_025tm", enlace: "https://www.twitch.tv/mt_025tm" },
+    { nombre: "Canal 2", urlCanal: "dor141xc", enlace: "https://www.twitch.tv/dor141xc" },
+    { nombre: "Canal 3", urlCanal: "tql_081rtt", enlace: "https://www.twitch.tv/tql_081rtt" },
+    { nombre: "Mt_025TM", urlCanal: "cc", enlace: "https://www.twitch.tv/id_10q" },
+    { nombre: "Canal 6", urlCanal: "canal2", enlace: "https://www.twitch.tv/3kkctoonn" },
+    { nombre: "Canal 8", urlCanal: "canal3", enlace: "https://www.twitch.tv/dk_0145" },
+    { nombre: "Mt_025TM", urlCanal: "pp", enlace: "https://www.twitch.tv/100ty05kk" },
+    { nombre: "Canal 44", urlCanal: "canal2", enlace: "https://www.twitch.tv/f1leld026" },
+    { nombre: "Canal 88", urlCanal: "canalf", enlace: "https://www.twitch.tv/cc_x24ff" },
+    { nombre: "Canal50", urlCanal: "cpp", enlace: "https://www.twitch.tv/tn_4400" },
+    { nombre: "Canal 883", urlCanal: "canal3", enlace: "https://www.twitch.tv/tn_4400" },
+    { nombre : "Canal 443", urlCanal: "novelas", enlace: "https://www.twitch.tv/tn_4400" },
+  ];
+    function crearReproductor(numero) {
+      // Crea un elemento div para el reproductor
+      var reproductor = document.createElement("div");
+      reproductor.classList.add("reproductor"); // Agrega la clase CSS
+      reproductor.id = "videoPlayer" + numero; // ID único
+
+      // Agrega el elemento div al contenedor principal
+      document.getElementById("reproductores").appendChild(reproductor);
+
+      // Crea un nuevo reproductor de Twitch
+      var player = new Twitch.Player(reproductor.id, {
+        width: 380,
+        height: 250,
+        channel: canales[numero].urlCanal
+      });
+
+      // Agrega la imagen del canal
+      var imagen = document.createElement("img");
+      imagen.src = canales[numero].foto;
+      reproductor.appendChild(imagen);
+
+      // Agrega el enlace al canal
+      var enlace = document.createElement("a");
+      enlace.href = canales[numero].enlace;
+      enlace.textContent = "Ver canal en Twitch";
+      enlace.classList.add("enlace");
+      reproductor.appendChild(enlace);
+    }
+
+    // Crea los 20 reproductores
+    for (var i = 0; i < 20; i++) {
+      crearReproductor(i);
+    }
+  </script>
+</body>
+</html>
